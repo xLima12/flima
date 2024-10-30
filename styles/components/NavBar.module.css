@@ -1,7 +1,6 @@
-/* styles/components/NavBar.module.css */
 .header {
   background-color: #fff;
-  padding: 2rem 5rem;
+  padding: 2rem 6rem;
 }
 
 .navContainer {
@@ -28,12 +27,18 @@
   border: 1px solid rgba(217, 217, 217, 0.45);
 }
 
-.navMenu ul li {
+.link {
   color: #1c1c1c;
   cursor: pointer;
+  text-decoration: none;
 }
 
-.navMenu ul li:hover {
+.link:hover {
+  transition: 0.5s;
+  color: #66a8ff;
+}
+
+.link:active {
   color: #66a8ff;
 }
 
@@ -42,6 +47,7 @@
   justify-content: center;
   align-items: center;
   background-color: #fff;
+  cursor: pointer;
   width: 48px;
   height: 40px;
   border-radius: 50px;

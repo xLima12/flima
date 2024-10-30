@@ -3,6 +3,7 @@ import styles from "@/styles/components/NavBar.module.css";
 import { Montserrat } from "next/font/google";
 import Button from "./Button";
 import Image from "next/image";
+import Link from "next/link";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -34,14 +35,37 @@ export default function NavBar() {
         />
         <nav className={styles.navMenu}>
           <ul>
-            <li>About</li>
-            <li>Education</li>
-            <li>Experience</li>
-            <li>Projects</li>
-            <li>Contact</li>
+            <li>
+              <Link className={styles.link} href={"/about"}>
+                About
+              </Link>
+            </li>
+            <li>
+              <Link className={styles.link} href={"#"}>
+                Education
+              </Link>
+            </li>
+            <li>
+              <Link className={styles.link} href={"#"}>
+                Experience
+              </Link>
+            </li>
+            <li>
+              <Link className={styles.link} href={"#"}>
+                Projects
+              </Link>
+            </li>
+            <li>
+              <Link className={styles.link} href={"#"}>
+                Contact
+              </Link>
+            </li>
           </ul>
         </nav>
-        <Button className={styles.themeButton} icon={<LightMode />} />
+        <Button
+          className={`${styles.themeButton} ${styles.icon}`}
+          icon={<LightMode />}
+        />
       </div>
     </header>
   );
