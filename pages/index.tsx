@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "@/styles/ComingSoon.module.css";
 import { Lato, Montserrat } from "next/font/google";
+import Layout from "@/components/Layout";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -16,17 +17,19 @@ const lato = Lato({
 
 export default function ComingSoon() {
   return (
-    <div className={`${styles.container} ${montserrat.className}`}>
-      <div className={styles.content}>
-        <h1 className={styles.title}>Coming Soon</h1>
-        <p className={`${styles.subtitle} ${lato.className}`}>
-          We're working hard to bring you an amazing experience. Stay tuned!
-        </p>
-        <div className={styles.loader}></div>
-        <p className={styles.footer}>
-          © 2024 Felipe Lima - All rights reserved.
-        </p>
+    <Layout>
+      <div className={`${styles.container} ${montserrat.className}`}>
+        <div className={styles.content}>
+          <h1 className={styles.title}>Coming Soon</h1>
+          <p className={`${styles.subtitle} ${lato.className}`}>
+            We're working hard to bring you an amazing experience. Stay tuned!
+          </p>
+          <div className={styles.loader}></div>
+          <p className={styles.footer}>
+            © 2024 Felipe Lima - All rights reserved.
+          </p>
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 }

@@ -11,14 +11,19 @@
   gap: 1.5rem;
 }
 
-.footList li {
+.link {
   font-size: 0.75rem;
   font-weight: 500;
   color: #1c1c1c;
   cursor: pointer;
+  text-decoration: none;
 }
 
-.footList li:hover {
+.link:hover {
+  color: #66a8ff;
+}
+
+.link:active {
   color: #66a8ff;
 }
 
