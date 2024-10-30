@@ -21,7 +21,12 @@ const lato = Lato({
 
 const GitHubIcon = (): JSX.Element => {
   return (
-    <Image width={24} height={24} src="/icons/Github.svg" alt="Icon GitHub" />
+    <Image
+      width={24}
+      height={24}
+      src="/icons/Github-light-theme.svg"
+      alt="Icon GitHub"
+    />
   );
 };
 
@@ -30,7 +35,7 @@ const LinkedIn = (): JSX.Element => {
     <Image
       width={24}
       height={24}
-      src="/icons/Linkedin.svg"
+      src="/icons/Linkedin-light-theme.svg"
       alt="Icon LinkedIn"
     />
   );
@@ -38,7 +43,12 @@ const LinkedIn = (): JSX.Element => {
 
 const Email = (): JSX.Element => {
   return (
-    <Image width={24} height={24} src="/icons/email.svg" alt="Icon e-mail" />
+    <Image
+      width={24}
+      height={24}
+      src="/icons/email-light-theme.svg"
+      alt="Icon e-mail"
+    />
   );
 };
 
