@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "@/styles/ComingSoon.module.css";
+import styles from "../styles/ComingSoon.module.css";
 import { Lato, Montserrat } from "next/font/google";
 
 const montserrat = Montserrat({

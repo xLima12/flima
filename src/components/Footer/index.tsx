@@ -31,7 +31,7 @@ const Footer = () => {
 
           {/* Copyright */}
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            © {currentYear} Felipe Lima. Todos os direitos reservados.
+            © {currentYear} Felipe Lima. All rights reserved.
           </p>
         </div>
       </div>
