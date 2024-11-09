@@ -15,7 +15,7 @@ interface Experience {
 interface Education {
   institution: string;
   course: string;
-  status: "Concluído" | "Em andamento";
+  status: "Concluído" | "Cursando";
   period: string;
   certified?: string;
 }
@@ -45,7 +45,7 @@ const educationItems: Education[] = [
   {
     institution: "Universidade Presbiteriana Mackenzie",
     course: "Análise e Desenvolvimento de Sistemas",
-    status: "Em andamento",
+    status: "Cursando",
     period: "Julho de 2025",
   },
   {
@@ -166,16 +166,22 @@ const Home = () => {
                         {edu.course}
                       </p>
                       <div className="mt-1 flex items-center">
-                        <Link
-                          href={`${edu.certified}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
-                        >
-                          {edu.status.match("Em andamento")
-                            ? "Cursando"
-                            : "Exibir certificado →"}
-                        </Link>
+                        {edu.status.match("Cursando") ? (
+                          <span className="text-gray-500 dark:text-gray-400">
+                            {edu.status}
+                          </span>
+                        ) : (
+                          <div className="mt-2">
+                            <Link
+                              href={`${edu.certified}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
+                            >
+                              Exibir certificado →
+                            </Link>
+                          </div>
+                        )}
                         <span className="ml-auto text-sm text-gray-500 dark:text-gray-400">
                           {edu.period}
                         </span>
