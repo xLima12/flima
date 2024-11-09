@@ -4,9 +4,9 @@ import Link from "next/link";
 interface Education {
   institution: string;
   course: string;
+  status: "Concluído" | "Cursando";
   period: string;
-  status?: string;
-  certificateUrl?: string;
+  certified?: string;
 }
 
 const educationItems: Education[] = [
@@ -20,19 +20,23 @@ const educationItems: Education[] = [
     institution: "FIAP",
     course: "Blockchain Advanced",
     period: "Janeiro de 2024",
-    certificateUrl: "#",
+    status: "Concluído",
+    certified:
+      "https://on.fiap.com.br/pluginfile.php/1/local_nanocourses/certificado_nanocourse/105640/65b1274522575cf7728a792adfa2bb18/certificado.png",
   },
   {
     institution: "DIO",
     course: "Santander Bootcamp | Fullstack Developer",
     period: "Março de 2023",
-    certificateUrl: "#",
+    status: "Concluído",
+    certified: "https://www.dio.me/certificate/B12927B4/share",
   },
   {
     institution: "DIO",
     course: "Desenvolvimento avançado em Java",
     period: "Setembro de 2021",
-    certificateUrl: "#",
+    status: "Concluído",
+    certified: "https://www.dio.me/certificate/B12927B4/share",
   },
 ];
 
@@ -72,15 +76,14 @@ const Education = () => {
                   </span>
                 </div>
                 <p className="text-gray-900 dark:text-white">{edu.course}</p>
-                {edu.status && (
+                {edu.status.match("Cursando") ? (
                   <span className="text-gray-500 dark:text-gray-400">
                     {edu.status}
                   </span>
-                )}
-                {edu.certificateUrl && (
+                ) : (
                   <div className="mt-2">
                     <Link
-                      href={edu.certificateUrl}
+                      href={`${edu.certified}`}
                       className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
                     >
                       Exibir certificado →

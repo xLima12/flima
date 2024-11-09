@@ -18,8 +18,8 @@ const experiences: Experience[] = [
   {
     company: "Qualiit Soluções em TI",
     role: "Analista de Suporte Pleno",
-    period: "Maio de 2023 - o momento",
-    logo: "/images/companies/qualiit.png",
+    period: "Mai de 2024 - o momento",
+    logo: "https://media.licdn.com/dms/image/v2/D4D0BAQGy0PkeVOGH8A/company-logo_200_200/company-logo_200_200/0/1701439802095/quallit_logo?e=1738800000&v=beta&t=j0p2r1oHuLWkdju_zkDXDukFis1kDx_YDUI4AuGJ8AU",
     description: [
       "Responsável por fornecer suporte especializado ao sistema WMS Manhattan, garantindo operações sem interrupções para os clientes.",
       "Desenvolvi uma aplicação Web utilizando Spring Boot e Angular, resultando em melhorias significativas no atendimento de chamados específicos e na eficiência operacional da equipe.",
@@ -27,7 +27,7 @@ const experiences: Experience[] = [
     ],
     subRole: {
       title: "Analista de Suporte Júnior",
-      period: "Jul de 2023 - Maio de 2024",
+      period: "Jul de 2023 - Mai de 2024",
       description: [
         "Responsável por fornecer suporte especializado ao sistema WMS Manhattan, garantindo operações sem interrupções para os clientes.",
         "Desenvolvi uma aplicação Web utilizando Spring Boot e Angular, resultando em melhorias significativas no atendimento de chamados específicos e na eficiência operacional da equipe.",
@@ -39,7 +39,7 @@ const experiences: Experience[] = [
     company: "Trilha Tecnologia",
     role: "Analista de Suporte",
     period: "Fev de 2022 - Abr de 2023",
-    logo: "/images/companies/trilha.png",
+    logo: "https://media.licdn.com/dms/image/v2/C560BAQFNlGGVe5l9oA/company-logo_200_200/company-logo_200_200/0/1674486395827?e=1738800000&v=beta&t=Faoilvrt2Os-zksN5Zwf0ydh4L3k_TuEa7kCOUA2TyU",
     description: [
       "Realizei atendimento em campo, manutenção em impressoras, formatação, backup e instalação de software, demonstrando habilidades técnicas e de resolução de problemas.",
       "Efetuei a troca de componentes de desktop e notebook, garantindo a disponibilidade e o funcionamento adequado dos equipamentos.",
@@ -50,7 +50,7 @@ const experiences: Experience[] = [
     company: "STT Digital",
     role: "Analista de Suporte",
     period: "Nov de 2018 - Set de 2019",
-    logo: "/images/companies/stt.png",
+    logo: "https://media.licdn.com/dms/image/v2/D4D0BAQEt6b1Ul_r8Rg/company-logo_200_200/company-logo_200_200/0/1666644425527?e=1738800000&v=beta&t=-7u0jb8ScQ1s1EDp2hE1spxb7wiIFAFduGpukOwq9n0",
     description: [
       "Análise e acompanhamento de automação fornecida pela STT, com ideias e relatórios para melhorias na automação.",
       "Análise, acompanhamento e suporte da ferramenta GATLink, desenvolvida e fornecida pela STT.",
