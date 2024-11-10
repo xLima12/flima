@@ -2,7 +2,7 @@ import database from "@/infra/database";
 import sendContactEmail from "@/src/services/emailService";
 
 export default async function handler(request, response) {
-  const allowedMethods = ["GET", "POST"];
+  const allowedMethods = "POST";
   if (!allowedMethods.includes(request.method)) {
     return response.status(405).json({
       error: `Method "${request.method}" not allowed`,
@@ -23,7 +23,7 @@ export default async function handler(request, response) {
 
       await sendContactEmail({ name, phone, email, subject, message });
 
-      response.status(200).json({ message: "Formulário enviado com sucesso!" });
+      response.status(200).json({ message: "Enviado com sucesso!" });
     } catch (error) {
       console.error("Erro ao processar o formulário:", error);
       response.status(500).json({ message: "Erro ao enviar o formulário" });
