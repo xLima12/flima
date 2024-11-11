@@ -9,7 +9,6 @@ async function query(queryObject: string | QueryObject) {
   let client;
   try {
     client = await getNewClient();
-    console.log(client);
     const result = await client.query(queryObject);
     return result;
   } catch (error) {

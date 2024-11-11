@@ -1,3 +1,4 @@
+import { useToast } from "@/src/context/ToastContext";
 import React, { useState } from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
@@ -19,10 +20,30 @@ const Contacts = () => {
     message: "",
   });
 
+  const { showToast } = useToast();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Implementar lógica de envio do formulário
-    console.log(formData);
+
+    try {
+      const response = await fetch("/api/v1/contacts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        showToast(data.message, "success");
+      } else {
+        showToast(data.message || "Erro ao enviar o formulário", "error");
+      }
+
+      setFormData({ name: "", phone: "", email: "", subject: "", message: "" });
+    } catch (error) {
+      console.error("Erro ao enviar o formulário:", error);
+      showToast("Erro ao enviar o formulário", "error");
+    }
   };
 
   const handleChange = (
