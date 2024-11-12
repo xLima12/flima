@@ -1,7 +1,7 @@
 import React from "react";
-import Image from "next/image";
+import Experience from "@/src/components/Experience";
 
-interface Experience {
+interface ExperienceProps {
   company: string;
   role: string;
   period: string;
@@ -14,7 +14,7 @@ interface Experience {
   };
 }
 
-const experiences: Experience[] = [
+const experiences: ExperienceProps[] = [
   {
     company: "Qualiit Soluções em TI",
     role: "Analista de Suporte Pleno",
@@ -60,7 +60,7 @@ const experiences: Experience[] = [
   },
 ];
 
-const Experience = () => {
+const Experiences = () => {
   return (
     <section className="min-h-screen bg-white dark:bg-gray-900 py-20">
       <div className="max-w-3xl ml-[55px] px-4">
@@ -77,61 +77,16 @@ const Experience = () => {
         {/* Experience Timeline */}
         <div className="space-y-16">
           {experiences.map((exp, index) => (
-            <div key={exp.company} className="space-y-8">
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 relative flex-shrink-0">
-                  <Image
-                    src={exp.logo}
-                    alt={exp.company}
-                    width={48}
-                    height={48}
-                    className="rounded-full"
-                  />
-                </div>
-                <div className="flex-1">
-                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                    {exp.company}
-                  </h2>
-                  <div className="mt-1 space-y-4">
-                    <div>
-                      <h3 className="text-gray-700 dark:text-gray-200">
-                        {exp.role}
-                      </h3>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
-                        {exp.period}
-                      </p>
-                    </div>
-                    <ul className="space-y-2 text-gray-600 dark:text-gray-300">
-                      {exp.description.map((item, i) => (
-                        <li key={i}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Sub Role if exists */}
-                  {exp.subRole && (
-                    <div className="mt-8 pl-4 border-l-2 border-gray-200 dark:border-gray-700">
-                      <div>
-                        <h3 className="text-gray-700 dark:text-gray-200">
-                          {exp.subRole.title}
-                        </h3>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">
-                          {exp.subRole.period}
-                        </p>
-                      </div>
-                      <ul className="mt-4 space-y-2 text-gray-600 dark:text-gray-300">
-                        {exp.subRole.description.map((item, i) => (
-                          <li key={i}>{item}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              </div>
-              {index < experiences.length - 1 && (
-                <div className="border-b border-gray-200 dark:border-gray-800" />
-              )}
-            </div>
+            <Experience
+              key={exp.company}
+              company={exp.company}
+              role={exp.role}
+              period={exp.period}
+              logo={exp.logo}
+              description={exp.description}
+              subRole={exp.subRole}
+              showDivider={index < experiences.length - 1}
+            />
           ))}
         </div>
       </div>
@@ -139,4 +94,4 @@ const Experience = () => {
   );
 };
 
-export default Experience;
+export default Experiences;
