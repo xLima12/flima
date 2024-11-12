@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
 import { FiSun, FiMoon, FiMenu, FiX } from "react-icons/fi";
+import Button from "../Button";
 
 interface NavbarProps {
   showLogo?: boolean;
@@ -64,29 +65,41 @@ const Navbar = ({ showLogo = true }: NavbarProps) => {
 
           {/* Theme Toggle and Mobile Menu Button */}
           <div className="flex items-center space-x-2">
-            <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="w-10 h-10 flex items-center justify-center rounded-lg text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700"
-              aria-label="Toggle theme"
-            >
-              {theme === "dark" ? (
-                <FiSun className="w-5 h-5" />
-              ) : (
-                <FiMoon className="w-5 h-5" />
-              )}
-            </button>
+            {theme === "dark" ? (
+              <Button
+                type="button"
+                key={theme}
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                icon={<FiSun className="w-5 h-5" />}
+                className="w-10 h-10 flex items-center justify-center rounded-lg text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700"
+              />
+            ) : (
+              <Button
+                type="button"
+                key={theme}
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                icon={<FiMoon className="w-5 h-5" />}
+                className="w-10 h-10 flex items-center justify-center rounded-lg text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700"
+              />
+            )}
 
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden w-10 h-10 flex items-center justify-center rounded-lg text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-              aria-label="Toggle menu"
-            >
-              {isMenuOpen ? (
-                <FiX className="w-6 h-6" />
-              ) : (
-                <FiMenu className="w-6 h-6" />
-              )}
-            </button>
+            {isMenuOpen ? (
+              <Button
+                type="button"
+                key={theme}
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                icon={<FiX className="w-6 h-6" />}
+                className="md:hidden w-10 h-10 flex items-center justify-center rounded-lg text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+              />
+            ) : (
+              <Button
+                type="button"
+                key={theme}
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                icon={<FiMenu className="w-6 h-6" />}
+                className="md:hidden w-10 h-10 flex items-center justify-center rounded-lg text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+              />
+            )}
           </div>
         </nav>
 
