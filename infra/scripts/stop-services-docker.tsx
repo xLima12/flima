@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const spawn = require("node:child_process");
 
 function stopServicesDocker() {
