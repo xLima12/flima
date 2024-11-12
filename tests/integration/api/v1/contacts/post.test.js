@@ -32,7 +32,7 @@ describe("POST /api/v1/contacts", () => {
           message: "Tests with jest.",
         }),
       });
-      expect(response.status).toBe(200);
+      expect(response.status).toBe(201);
     });
     test("For the second time", async () => {
       const response2 = await fetch("http://localhost:3000/api/v1/contacts", {
