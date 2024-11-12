@@ -23,7 +23,7 @@ export default async function handler(request, response) {
 
       await sendContactEmail({ name, phone, email, subject, message });
 
-      response.status(200).json({ message: "Enviado com sucesso!" });
+      response.status(201).send();
     } catch (error) {
       console.error("Erro ao processar o formulário:", error);
       response.status(500).json({ message: "Erro ao enviar o formulário" });

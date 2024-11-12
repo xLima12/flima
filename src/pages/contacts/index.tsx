@@ -1,3 +1,5 @@
+import Form from "@/src/components/Form";
+import SocialMedia from "@/src/components/SocialMedia";
 import { useToast } from "@/src/context/ToastContext";
 import React, { useState } from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
@@ -33,8 +35,8 @@ const Contacts = () => {
       });
 
       const data = await response.json();
-      if (response.ok) {
-        showToast(data.message, "success");
+      if (response.status === 201) {
+        showToast("Enviado com sucesso!", "success");
       } else {
         showToast(data.message || "Erro ao enviar o formulário", "error");
       }
@@ -46,15 +48,18 @@ const Contacts = () => {
     }
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  const fields = [
+    { name: "nome", label: "Nome:" },
+    { name: "celular", label: "Cel:", mask: "phone", type: "tel" },
+    {
+      name: "e-mail",
+      label: "E-mail:",
+      validate: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+      type: "email",
+    },
+    { name: "assunto", label: "Assunto:" },
+    { name: "mensagem", label: "Mensagem:", type: "textarea" },
+  ];
 
   return (
     <section className="min-h-screen bg-white dark:bg-gray-900 py-20">
@@ -76,98 +81,7 @@ const Contacts = () => {
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
               Envie sua mensagem e vamos conversar sobre novas oportunidades!
             </h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                >
-                  Nome:
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent outline-none"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="phone"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                >
-                  Cel:
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent outline-none"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                >
-                  E-mail:
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent outline-none"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="subject"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                >
-                  Assunto:
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent outline-none"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                >
-                  Mensagem:
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  rows={4}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent outline-none"
-                  required
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
-              >
-                Enviar
-              </button>
-            </form>
+            <Form onSubmit={handleSubmit} fields={fields} />
           </div>
 
           {/* Map and Social Links */}
@@ -187,31 +101,24 @@ const Contacts = () => {
 
             {/* Social Links */}
             <div className="space-y-4">
-              <a
-                href="https://github.com/yourusername"
-                target="_blank"
-                rel="noopener noreferrer"
+              <SocialMedia
+                url="https://github.com/xLima12"
+                icon={<FaGithub className="w-6 h-6" />}
+                name="Siga no GitHub"
                 className="flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
-              >
-                <FaGithub className="w-6 h-6" />
-                <span>Siga no GitHub</span>
-              </a>
-              <a
-                href="https://linkedin.com/in/yourusername"
-                target="_blank"
-                rel="noopener noreferrer"
+              />
+              <SocialMedia
+                url="https://www.linkedin.com/in/felipe-lima-19873a14b/"
+                icon={<FaLinkedin className="w-6 h-6" />}
+                name="Siga no LinkedIn"
                 className="flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
-              >
-                <FaLinkedin className="w-6 h-6" />
-                <span>Siga no LinkedIn</span>
-              </a>
-              <a
-                href="mailto:contato@flima.dev"
+              />
+              <SocialMedia
+                url="mailto:contato@flima.dev"
+                icon={<MdEmail className="w-6 h-6" />}
+                name="contato@flima.dev"
                 className="flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
-              >
-                <MdEmail className="w-6 h-6" />
-                <span>contato@flima.dev</span>
-              </a>
+              />
             </div>
           </div>
         </div>
