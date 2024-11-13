@@ -1,7 +1,7 @@
 import Form from "@/src/components/Form";
 import SocialMedia from "@/src/components/SocialMedia";
 import { useToast } from "@/src/context/ToastContext";
-import React, { useState } from "react";
+import React from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
@@ -14,51 +14,49 @@ interface ContactForm {
 }
 
 const Contacts = () => {
-  const [formData, setFormData] = useState<ContactForm>({
-    name: "",
-    phone: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-
   const { showToast } = useToast();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  // Função de envio com a estrutura correta dos dados e mensagens de erro
+  const handleSubmit = async (formData: Record<string, string>) => {
+    const contactForm: ContactForm = {
+      name: formData.name || "",
+      phone: formData.phone || "",
+      email: formData.email || "",
+      subject: formData.subject || "",
+      message: formData.message || "",
+    };
 
     try {
       const response = await fetch("/api/v1/contacts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(contactForm),
       });
 
       const data = await response.json();
       if (response.status === 201) {
         showToast("Enviado com sucesso!", "success");
       } else {
-        showToast(data.message || "Erro ao enviar o formulário", "error");
+        showToast(data.message || "Erro desconhecido", "error");
       }
-
-      setFormData({ name: "", phone: "", email: "", subject: "", message: "" });
     } catch (error) {
       console.error("Erro ao enviar o formulário:", error);
       showToast("Erro ao enviar o formulário", "error");
     }
   };
 
+  // Campos do formulário com os nomes que correspondem ao `formData`
   const fields = [
-    { name: "nome", label: "Nome:" },
-    { name: "celular", label: "Cel:", mask: "phone", type: "tel" },
+    { name: "name", label: "Nome:" },
+    { name: "phone", label: "Celular:", mask: "phone", type: "tel" },
     {
-      name: "e-mail",
+      name: "email",
       label: "E-mail:",
-      validate: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+      validate: (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
       type: "email",
     },
-    { name: "assunto", label: "Assunto:" },
-    { name: "mensagem", label: "Mensagem:", type: "textarea" },
+    { name: "subject", label: "Assunto:" },
+    { name: "message", label: "Mensagem:", type: "textarea" },
   ];
 
   return (

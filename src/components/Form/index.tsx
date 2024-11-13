@@ -1,50 +1,80 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import Button from "../Button";
 
-const Form = ({ fields, onSubmit }) => {
+interface Field {
+  name: string;
+  label: string;
+  type?: string;
+  mask?: string;
+  validate?: (value: string) => boolean;
+}
+
+interface FormProps {
+  fields: Field[];
+  onSubmit: (formData: Record<string, string>) => void;
+}
+
+const Form: React.FC<FormProps> = ({ fields, onSubmit }) => {
   const initialData = fields.reduce(
     (acc, field) => ({ ...acc, [field.name]: "" }),
-    {},
+    {} as Record<string, string>,
   );
-  const [formData, setFormData] = useState(initialData);
-  const [errors, setErrors] = useState({});
 
-  const validateField = (name, value, validate) => {
+  const [formData, setFormData] = useState<Record<string, string>>(initialData);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validateField = (
+    name: string,
+    value: string,
+    validate?: (value: string) => boolean,
+  ): string => {
     if (validate && typeof validate === "function") {
       return validate(value) ? "" : `Campo ${name} inválido`;
     }
     return !value.trim() ? `Campo ${name} é obrigatório` : "";
   };
 
-  const handleInputChange = (name, value, mask) => {
-    let maskedValue = value;
+  const applyMask = (value: string, mask?: string): string => {
     if (mask === "phone") {
-      value = value.replace(/\D/g, "");
-      if (value.length > 11) value = value.slice(0, 11);
-      maskedValue =
-        value.length > 10
-          ? `(${value.slice(0, 2)}) ${value.slice(2, 3)}.${value.slice(3, 7)}-${value.slice(7)}`
-          : `(${value.slice(0, 2)}) ${value.slice(2, 6)}-${value.slice(6)}`;
-    }
+      let cleanedValue = value.replace(/\D/g, "");
+      if (cleanedValue.length > 11) cleanedValue = cleanedValue.slice(0, 11);
 
+      return cleanedValue.length > 10
+        ? `(${cleanedValue.slice(0, 2)}) ${cleanedValue.slice(2, 3)}.${cleanedValue.slice(3, 7)}-${cleanedValue.slice(7)}`
+        : `(${cleanedValue.slice(0, 2)}) ${cleanedValue.slice(2, 6)}-${cleanedValue.slice(6)}`;
+    }
+    return value;
+  };
+
+  const handleInputChange = (name: string, value: string, mask?: string) => {
+    const maskedValue = applyMask(value, mask);
     setFormData((prev) => ({ ...prev, [name]: maskedValue }));
+
+    if (errors[name]) {
+      const error = validateField(name, maskedValue);
+      setErrors((prevErrors) => ({ ...prevErrors, [name]: error }));
+    }
   };
 
   const validateForm = () => {
-    const newErrors = fields.reduce((acc, field) => {
-      const error = validateField(
-        field.name,
-        formData[field.name],
-        field.validate,
-      );
-      return error ? { ...acc, [field.name]: error } : acc;
-    }, {});
+    const newErrors = fields.reduce(
+      (acc, field) => {
+        const error = validateField(
+          field.name,
+          formData[field.name],
+          field.validate,
+        );
+        return error ? { ...acc, [field.name]: error } : acc;
+      },
+      {} as Record<string, string>,
+    );
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
       onSubmit(formData);
@@ -94,7 +124,6 @@ const Form = ({ fields, onSubmit }) => {
         type="submit"
         className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
         name="Enviar"
-        onClick={handleSubmit}
       />
     </form>
   );
