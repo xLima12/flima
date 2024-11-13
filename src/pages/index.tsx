@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { HiDownload } from "react-icons/hi";
 import Navbar from "../components/Navbar/index";
+import SocialMedia from "../components/SocialMedia";
+import CardExperience from "../components/CardExperience";
+import Button from "../components/Button";
+import CardEducation from "../components/CardEducation";
 
-interface Experience {
+interface ExperienceProps {
   company: string;
   role: string;
   period: string;
   logo: string;
 }
 
-interface Education {
+interface EducationProps {
   institution: string;
   course: string;
   status: "Concluído" | "Cursando";
@@ -20,7 +23,7 @@ interface Education {
   certified?: string;
 }
 
-const experiences: Experience[] = [
+const experiences: ExperienceProps[] = [
   {
     company: "Qualiit Soluções em TI",
     role: "Analista de Suporte Pleno",
@@ -41,7 +44,7 @@ const experiences: Experience[] = [
   },
 ];
 
-const educationItems: Education[] = [
+const educationItems: EducationProps[] = [
   {
     institution: "Universidade Presbiteriana Mackenzie",
     course: "Análise e Desenvolvimento de Sistemas",
@@ -128,24 +131,18 @@ const Home = () => {
 
               {/* Social Links */}
               <div className="flex space-x-4">
-                <Link
-                  href="https://github.com/xLima12"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
-                  aria-label="GitHub Profile"
-                >
-                  <FaGithub className="w-6 h-6" />
-                </Link>
-                <Link
-                  href="https://www.linkedin.com/in/felipe-lima-19873a14b/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
-                  aria-label="LinkedIn Profile"
-                >
-                  <FaLinkedin className="w-6 h-6" />
-                </Link>
+                <SocialMedia
+                  url="https://github.com/xLima12"
+                  icon={<FaGithub className="w-6 h-6" />}
+                  name=""
+                  className="flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+                />
+                <SocialMedia
+                  url="https://www.linkedin.com/in/felipe-lima-19873a14b/"
+                  icon={<FaLinkedin className="w-6 h-6" />}
+                  name=""
+                  className="flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+                />
               </div>
             </div>
 
@@ -155,38 +152,14 @@ const Home = () => {
               <div className="space-y-6">
                 <div className="space-y-4">
                   {educationItems.map((edu) => (
-                    <div
+                    <CardEducation
                       key={edu.course}
-                      className="p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                    >
-                      <h3 className="font-medium text-gray-900 dark:text-white">
-                        {edu.institution}
-                      </h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-300">
-                        {edu.course}
-                      </p>
-                      <div className="mt-1 flex items-center">
-                        {edu.status.match("Cursando") ? (
-                          <span className="text-gray-500 dark:text-gray-400">
-                            {edu.status}
-                          </span>
-                        ) : (
-                          <div className="mt-2">
-                            <Link
-                              href={`${edu.certified}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
-                            >
-                              Exibir certificado →
-                            </Link>
-                          </div>
-                        )}
-                        <span className="ml-auto text-sm text-gray-500 dark:text-gray-400">
-                          {edu.period}
-                        </span>
-                      </div>
-                    </div>
+                      institution={edu.institution}
+                      course={edu.course}
+                      period={edu.period}
+                      status={edu.status}
+                      certified={edu.certified}
+                    />
                   ))}
                 </div>
               </div>
@@ -198,45 +171,23 @@ const Home = () => {
                 <div className="p-4  bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm rounded-xl ">
                   <div className="space-y-6">
                     {experiences.map((exp, index) => (
-                      <div key={exp.company}>
-                        <div className="flex items-start space-x-4">
-                          <div className="w-12 h-12 relative flex-shrink-0">
-                            <Image
-                              src={exp.logo}
-                              alt={exp.company}
-                              width={48}
-                              height={48}
-                              className="rounded-full"
-                            />
-                          </div>
-                          <div className="flex-1">
-                            <h3 className="font-medium text-gray-900 dark:text-white">
-                              {exp.company}
-                            </h3>
-                            <div className="flex items-center justify-between w-full mt-1">
-                              <span className="text-sm text-gray-500 dark:text-gray-400">
-                                {exp.role}
-                              </span>
-                              <span className="text-sm text-gray-500 dark:text-gray-400 ml-4">
-                                {exp.period}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                        {index < experiences.length - 1 && (
-                          <div className="my-8 border-b border-gray-200 dark:border-gray-700" />
-                        )}
-                      </div>
+                      <CardExperience
+                        key={exp.company}
+                        logo={exp.logo}
+                        company={exp.company}
+                        role={exp.role}
+                        period={exp.period}
+                        showDivider={index < experiences.length - 1}
+                      />
                     ))}
                   </div>
                 </div>
-                <button
+                <Button
+                  type="button"
+                  name="Download CV"
+                  icon={<HiDownload className="w-5 h-5" />}
                   className="flex w-full justify-center items-center space-x-2 px-4 py-4 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-                  aria-label="Download CV"
-                >
-                  <HiDownload className="w-5 h-5" />
-                  <span>Download CV</span>
-                </button>
+                />
               </div>
             </div>
           </div>

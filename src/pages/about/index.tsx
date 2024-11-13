@@ -1,5 +1,5 @@
+import SocialMedia from "@/src/components/SocialMedia";
 import Image from "next/image";
-import Link from "next/link";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
@@ -61,36 +61,27 @@ const About = () => {
 
             {/* Social Links */}
             <div className="flex flex-col justify-start space-y-6">
-              <Link
-                href="https://github.com/yourusername"
-                target="_blank"
-                rel="noopener noreferrer"
+              <SocialMedia
+                key="GitHub"
+                name="Siga no GitHub"
+                url="https://github.com/xLima12"
+                icon={<FaGithub className="w-8 h-8" />}
                 className="flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
-                aria-label="Siga no GitHub"
-              >
-                <FaGithub className="w-8 h-8" />
-                <span>Siga no GitHub</span>
-              </Link>
-
-              <Link
-                href="https://linkedin.com/in/yourusername"
-                target="_blank"
-                rel="noopener noreferrer"
+              />
+              <SocialMedia
+                key="LinkedIn"
+                name="Siga no LinkedIn"
+                url="https://www.linkedin.com/in/felipe-lima-19873a14b/"
+                icon={<FaLinkedin className="w-8 h-8" />}
                 className="flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
-                aria-label="Siga no LinkedIn"
-              >
-                <FaLinkedin className="w-8 h-8" />
-                <span>Siga no LinkedIn</span>
-              </Link>
-
-              <Link
-                href="mailto:contato@flima.dev"
+              />
+              <SocialMedia
+                key="Email"
+                name="contato@flima.dev"
+                url="mailto:contato@flima.dev"
+                icon={<MdEmail className="w-8 h-8" />}
                 className="flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
-                aria-label="Entre em contato por email"
-              >
-                <MdEmail className="w-8 h-8" />
-                <span>contato@flima.dev</span>
-              </Link>
+              />
             </div>
           </div>
         </div>

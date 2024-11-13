@@ -1,6 +1,5 @@
 import React from "react";
-import Image from "next/image";
-import Link from "next/link";
+import Card from "@/src/components/CardProject";
 
 interface Project {
   title: string;
@@ -57,47 +56,13 @@ const Projects = () => {
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project) => (
-            <div key={project.title} className="group space-y-3">
-              {/* Project Image */}
-              <div className="aspect-square relative overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-              </div>
-
-              {/* Project Info */}
-              <div className="space-y-2">
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  {project.title}
-                </h2>
-                <p className="text-sm text-gray-600 dark:text-gray-300">
-                  {project.description}
-                </p>
-                <Link
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-                >
-                  <svg
-                    className="w-4 h-4"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-                  </svg>
-                  <span className="text-sm">github.com</span>
-                </Link>
-              </div>
-            </div>
+            <Card
+              key={project.title}
+              title={project.title}
+              description={project.description}
+              photo={project.image}
+              url={project.githubUrl}
+            />
           ))}
         </div>
       </div>
