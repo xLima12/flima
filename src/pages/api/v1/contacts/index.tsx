@@ -46,7 +46,7 @@ export default async function handler(
         message,
       });
 
-      response.status(201).json({ message: "Contato enviado com sucesso" });
+      response.status(201).send({ message: "Contato enviado com sucesso" });
     } catch (error) {
       console.error("Erro ao processar o formulário:", error);
       response.status(500).json({
