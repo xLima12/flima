@@ -21,8 +21,6 @@ describe("POST /api/v1/contacts", () => {
   describe("Anonymous user", () => {
     describe("Running send e-mail message", () => {});
     test("For the first time", async () => {
-      const result = await database.query("SELECT * FROM contacts");
-      console.log(result);
       const response = await fetch("http://localhost:3000/api/v1/contacts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -34,7 +32,6 @@ describe("POST /api/v1/contacts", () => {
           message: "Tests with jest.",
         }),
       });
-      console.log(`Resposta do teste: ${response.status}`);
       expect(response.status).toBe(201);
     });
     test("For the second time", async () => {
