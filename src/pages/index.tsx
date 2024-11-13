@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
