@@ -42,6 +42,8 @@ const Education: React.FC<EducationProps> = ({
           <div className="mt-2">
             <Link
               href={`${certified}`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
             >
               Exibir certificado →

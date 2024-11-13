@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
@@ -7,6 +8,7 @@ import SocialMedia from "../components/SocialMedia";
 import CardExperience from "../components/CardExperience";
 import Button from "../components/Button";
 import CardEducation from "../components/CardEducation";
+import { useToast } from "@/src/context/ToastContext";
 
 interface ExperienceProps {
   company: string;
@@ -69,6 +71,7 @@ const educationItems: EducationProps[] = [
 ];
 
 const Home = () => {
+  const { showToast } = useToast();
   const [scrollProgress, setScrollProgress] = useState(0);
   const [showNavbarLogo, setShowNavbarLogo] = useState(false);
 
@@ -187,6 +190,7 @@ const Home = () => {
                   name="Download CV"
                   icon={<HiDownload className="w-5 h-5" />}
                   className="flex w-full justify-center items-center space-x-2 px-4 py-4 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                  onClick={(e) => showToast("Estou trabalhando nisso!", "info")}
                 />
               </div>
             </div>
