@@ -9,7 +9,7 @@ beforeAll(async () => {
     CREATE TABLE IF NOT EXISTS contacts (
       id SERIAL PRIMARY KEY,
       name VARCHAR(100),
-      phone CHAR(14),
+      phone CHAR(11),
       email VARCHAR(100),
       subject VARCHAR(100),
       message TEXT
@@ -21,6 +21,8 @@ describe("POST /api/v1/contacts", () => {
   describe("Anonymous user", () => {
     describe("Running send e-mail message", () => {});
     test("For the first time", async () => {
+      const result = await database.query("SELECT * FROM contacts");
+      console.log(result);
       const response = await fetch("http://localhost:3000/api/v1/contacts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -32,6 +34,7 @@ describe("POST /api/v1/contacts", () => {
           message: "Tests with jest.",
         }),
       });
+      console.log(`Resposta do teste: ${response.status}`);
       expect(response.status).toBe(201);
     });
     test("For the second time", async () => {
