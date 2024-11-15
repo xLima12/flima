@@ -19,8 +19,7 @@ export default async function handler(
     // Verificação de campos obrigatórios
     if (!name || !phone || !email || !subject || !message) {
       return response.status(400).json({
-        error:
-          "Todos os campos (name, phone, email, subject, message) são obrigatórios.",
+        error: "Todos os campos são obrigatórios.",
       });
     }
 
