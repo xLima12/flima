@@ -61,7 +61,7 @@ const Contacts = () => {
 
   return (
     <section className="min-h-screen bg-white dark:bg-gray-900 py-20">
-      <div className="max-w-6xl ml-[55px] px-4">
+      <div className="max-w-6xl sm:ml-[4vw] md:ml-[4vw] lg:ml-[3vw] xl:ml-[2vw] sm:mr-[4vw] md:mr-[4vw] lg:mr-[3vw] px-4">
         {/* Header */}
         <div className="space-y-4 mb-16">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
