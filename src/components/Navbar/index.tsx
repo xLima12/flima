@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -22,6 +22,16 @@ const Navbar = ({ showLogo = true }: NavbarProps) => {
   const router = useRouter();
   const { theme, setTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Memoriza a função toggleTheme para evitar re-criação
+  const toggleTheme = useCallback(() => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  }, [theme, setTheme]);
+
+  // Memoriza a função toggleMenu para evitar re-criação
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen((prev) => !prev);
+  }, []);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900">
@@ -68,16 +78,14 @@ const Navbar = ({ showLogo = true }: NavbarProps) => {
             {theme === "dark" ? (
               <Button
                 type="button"
-                key={theme}
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                onClick={toggleTheme} // Usando a função memoizada
                 icon={<FiSun className="w-5 h-5" />}
                 className="w-10 h-10 flex items-center justify-center rounded-lg text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700"
               />
             ) : (
               <Button
                 type="button"
-                key={theme}
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                onClick={toggleTheme} // Usando a função memoizada
                 icon={<FiMoon className="w-5 h-5" />}
                 className="w-10 h-10 flex items-center justify-center rounded-lg text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700"
               />
@@ -86,16 +94,14 @@ const Navbar = ({ showLogo = true }: NavbarProps) => {
             {isMenuOpen ? (
               <Button
                 type="button"
-                key={theme}
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                onClick={toggleMenu} // Usando a função memoizada
                 icon={<FiX className="w-6 h-6" />}
                 className="md:hidden w-10 h-10 flex items-center justify-center rounded-lg text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
               />
             ) : (
               <Button
                 type="button"
-                key={theme}
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                onClick={toggleMenu} // Usando a função memoizada
                 icon={<FiMenu className="w-6 h-6" />}
                 className="md:hidden w-10 h-10 flex items-center justify-center rounded-lg text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
               />
@@ -130,4 +136,5 @@ const Navbar = ({ showLogo = true }: NavbarProps) => {
   );
 };
 
-export default Navbar;
+// Envolva o Navbar com React.memo para evitar re-renderizações desnecessárias
+export default React.memo(Navbar);

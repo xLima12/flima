@@ -6,7 +6,7 @@ import { MdEmail } from "react-icons/md";
 const About = () => {
   return (
     <section className="min-h-screen bg-white dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="max-w-7xl sm:ml-[4vw] md:ml-[4vw] lg:ml-[3vw] xl:ml-[2vw] px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Left Column - Text Content */}
           <div className="space-y-8">
